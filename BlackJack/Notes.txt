@@ -1,4 +1,13 @@
 ﻿Generate random list between 0 and 51
+Convert #'s to Cards
+Deal first card to player
+second card to dealer
+third to player
+fourth to dealer
+check for blackjack
+ask player to hit or stand
+Dealer = if cardValue < 16, must hit until cardValue >= 17
+when both states are stand, determine winner
 
 CARD SUITE
 0-12 cardSuite = Hearts

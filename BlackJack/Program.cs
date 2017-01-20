@@ -10,6 +10,8 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
+            int[] deck = new int[];
+            Shuffle(int[] deck);
         }
     }
 }
