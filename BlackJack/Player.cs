@@ -8,5 +8,10 @@ namespace BlackJack
 {
     class Player
     {
+        string newPlayer = "Player 1";
+        int handValue = 0;
+        bool hitStand;
+        int cash = 100;
+        int bet = 10;
     }
 }

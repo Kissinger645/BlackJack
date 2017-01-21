@@ -13,10 +13,13 @@ namespace BlackJack
             Deck newDeck = new Deck();
             newDeck.Shuffle();
 
-            for (int i = 0; i < length; i++)
+            Console.WriteLine("What happens in The Iron Yard, stays in The Iron Yard");
+            for (int i = 0; i < 52; i++)
             {
-
+                Console.WriteLine(newDeck.GetCard());
             }
+            
+            
 
             Console.ReadKey();
         }
