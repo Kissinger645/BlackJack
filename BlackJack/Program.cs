@@ -25,13 +25,16 @@ namespace BlackJack
             gameDeck.Shuffle();
 
             Console.WriteLine("What happens in The Iron Yard, stays in The Iron Yard");
-            playerHand.Add(gameDeck.GetCard());                        
+            playerHand.Add(gameDeck.GetCard());
             dealerHand.Add(gameDeck.GetCard());
             playerHand.Add(gameDeck.GetCard());
             dealerHand.Add(gameDeck.GetCard());
+            Console.WriteLine("Player has:");
+            playerHand.ForEach(Console.WriteLine);
+            Console.WriteLine("Dealer has:");
+            dealerHand.ForEach(Console.WriteLine);
+            //check for blackjack
 
-            dealerHand.ForEach(Console.WriteLine);
-            dealerHand.ForEach(Console.WriteLine);
             
 
             Console.ReadKey();

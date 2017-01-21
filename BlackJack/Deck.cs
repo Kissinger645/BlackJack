@@ -9,7 +9,7 @@ namespace BlackJack
     public class Deck
     {
 
-        private int cardID;
+        private int cardID = 0;
         public int cardValue;
         private string cardSuit;
         private string cardType;
