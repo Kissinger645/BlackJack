@@ -9,41 +9,45 @@ namespace BlackJack
     class Deck
     {
 
-        private string cardNumber;
+        private int cardNumber;
         public int cardValue;
         private string cardSuit;
         private string cardType;
-        private int[] deck = new int[52];        
+        private Cards[] newDeck;
+        Random rng = new Random();
+
 
         public Deck()
         {
-            string[] cardSuit = {"Hearts", "Diamonds", "Spades", "Clubs"};
-            string[] cardType = {"A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"};
-
+            string[] cardSuit = { "Hearts", "Diamonds", "Spades", "Clubs" };
+            string[] cardType = { "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2" };
+            newDeck = new Cards[52];
+            for (int i = 0; i < 52; i++)
+            {
+                newDeck[i] = new Cards(cardSuit[i / 13], cardType[i % 13]);
+            }
 
         }
-
 
         //Shuffle method from:
         //http://stackoverflow.com/questions/1150646/card-shuffling-in-c-sharp
         //based on Fisher-Yates shuffle
 
-        static public void Shuffle(int[] deck)
+        public void Shuffle()
         {
-            for (int n = deck.Length - 1; n > 0; --n)
+            cardNumber = 0;
+            for (int n = newDeck.Length - 1; n > 0; --n)
             {
-                int k = rng.Next(n+1);
-                int temp = deck[n];
-                deck[n] = deck[k];
-                deck[k] = temp;
+                int k = rng.Next(n + 1);
+                Cards temp = newDeck[n];
+                newDeck[n] = newDeck[k];
+                newDeck[k] = temp;
             }
 
         }
 
-        
 
-
-
-      
     }
+
 }
+

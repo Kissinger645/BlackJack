@@ -10,8 +10,15 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
-            int[] deck = new int[];
-            Shuffle(int[] deck);
+            Deck newDeck = new Deck();
+            newDeck.Shuffle();
+
+            for (int i = 0; i < length; i++)
+            {
+
+            }
+
+            Console.ReadKey();
         }
     }
 }
