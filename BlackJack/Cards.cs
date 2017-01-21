@@ -12,9 +12,6 @@ namespace BlackJack
         private string cardSuit;
         private string cardType;
         
-
-
-
         public Cards(string _cardSuit, string _cardType, int _cardValue)
         {
             cardSuit = _cardSuit;
@@ -22,11 +19,9 @@ namespace BlackJack
             cardValue = _cardValue;
         }
 
-        //need to add value  
-
         public override string ToString()
         {
-            return ($"{cardType} of {cardSuit} with {cardValue} points");
+            return ($"{cardType} of {cardSuit}");
         }
 
     }

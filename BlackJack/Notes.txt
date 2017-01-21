@@ -47,6 +47,11 @@ if card type is 10 || J || Q || K
 2,15,28,41 = 3
 1,14,27,40 = 2
 
+public override string ToString()
+        {
+            return ($"{cardType} of {cardSuit}");
+        }
+
 /*
             public void getSuit()
             {

@@ -8,8 +8,19 @@ namespace BlackJack
 {
     class Dealer
     {
-        int handValue = 0;
+        int dealerValue = 0;
         bool hitStand;
+        List<string> dealerHand = new List<string>();
+
+        public Dealer()
+        {
+
+        }
+
+        public void GetCard()
+        {
+            //dealerHand.Add(newDeck.GetCard());
+        }
     }
 }
 //

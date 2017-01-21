@@ -1,0 +1,5 @@
+﻿
+handValue
+deterimine hit or stand
+declare winner
+
