@@ -24,6 +24,21 @@ namespace BlackJack
             return ($"{cardType} of {cardSuit}");
         }
 
+        public string GetCardSuit()
+        {
+            return cardSuit;
+        }
+
+        public string GetCardType()
+        {
+            return cardType;
+        }
+
+        public int GetCardValue()
+        {
+            return cardValue;
+        }
+
     }
 
 }
