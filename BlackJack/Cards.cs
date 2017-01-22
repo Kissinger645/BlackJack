@@ -8,9 +8,13 @@ namespace BlackJack
 {
     public class Cards
     {
-        private int cardValue;
+        public int cardValue;
         private string cardSuit;
         private string cardType;
+
+        public Cards()
+        {
+        }
         
         public Cards(string _cardSuit, string _cardType, int _cardValue)
         {
@@ -19,11 +23,13 @@ namespace BlackJack
             cardValue = _cardValue;
         }
 
+        
         public override string ToString()
         {
-            return ($"{cardType} of {cardSuit}");
-        }
+            return ($"{cardType} of {cardSuit} = {cardValue}");
 
+        }
+        
         public string GetCardSuit()
         {
             return cardSuit;

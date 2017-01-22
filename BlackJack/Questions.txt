@@ -1,3 +1,4 @@
 ﻿need ideas for effective tests
 confused about using enums
 confused by using public vs inheritance
+is it better to keep program clean and move everything to another class?

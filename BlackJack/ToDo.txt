@@ -1,5 +1,3 @@
 ﻿
-handValue
-deterimine hit or stand
-declare winner
-
+get cardValues from cards
+2 Aces = bust, need option to make A=1
