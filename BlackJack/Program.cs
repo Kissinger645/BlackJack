@@ -10,22 +10,21 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
-            var dealerHand = new List<Cards>();
-            int dealerValue = 0;
+            var dealerHand = new List<Cards>();            
             var playerHand = new List<Cards>();
-            int playerValue = 0;
-            
+            bool stand = false;
             Deck gameDeck = new Deck();
             gameDeck.Shuffle();
 
-            Console.WriteLine("What happens in The Iron Yard, stays in The Iron Yard");
             Console.WriteLine("Welcome to BlackJack");
             playerHand.Add(gameDeck.GetCard());
             dealerHand.Add(gameDeck.GetCard());
             playerHand.Add(gameDeck.GetCard());
             dealerHand.Add(gameDeck.GetCard());
+            int playerValue = playerHand.Sum(x => x.cardValue);
             Console.WriteLine($"Player has {playerValue}");
             playerHand.ForEach(Console.WriteLine);
+            int dealerValue = dealerHand.Sum(x => x.cardValue);
             Console.WriteLine($"Dealer has {dealerValue}");
             dealerHand.ForEach(Console.WriteLine);
 
@@ -35,28 +34,39 @@ namespace BlackJack
             }
             else if (playerValue == 21)
             {
-                Console.WriteLine("BLACKJACK - YOU WIN!!"); 
+                Console.WriteLine("BLACKJACK - YOU WIN!!");
             }
-            else
+                        
+            while (stand == false)
             {
-                Console.WriteLine("Enter H for HIT or S for STAND");                
-            }
-
-            var input = Console.ReadLine();
-            if (input.ToUpper() == "H")
-            {
-                playerHand.Add(gameDeck.GetCard());
-                //check for bust
                 Console.WriteLine("Enter H for HIT or S for STAND");
+                var input = Console.ReadLine();
+                if (input.ToUpper() == "H")
+                {
+                    playerHand.Add(gameDeck.GetCard());
+                    playerValue = playerHand.Sum(x => x.cardValue);
+                    Console.WriteLine($"Player has {playerValue}");
+                    playerHand.ForEach(Console.WriteLine);
+                    //check for bust
+                }
+                else
+                {
+                    stand = true;
+                }
             }
 
-            else //player stands
+            //player stands
             {
                 while (dealerValue < 16)
                 {
                     dealerHand.Add(gameDeck.GetCard());
+                    dealerValue = dealerHand.Sum(x => x.cardValue);
+                    Console.WriteLine($"Dealer has {dealerValue}");
+                    dealerHand.ForEach(Console.WriteLine);
+                    //check for bust
                 }
             }
+
             //Player Stands, Dealer >= 17
             if (dealerValue > playerValue)
             {
@@ -66,13 +76,6 @@ namespace BlackJack
             {
                 Console.WriteLine("Congrats you win!");
             }
-
-
-            //if cardValue > 21, player busts
-            //Dealer = if cardValue < 16, must hit until cardValue >= 17
-            //when both states are stand, determine winner
-
-
 
             Console.ReadKey();
         }

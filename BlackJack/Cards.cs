@@ -26,7 +26,7 @@ namespace BlackJack
         
         public override string ToString()
         {
-            return ($"{cardType} of {cardSuit} = {cardValue}");
+            return ($"{cardType} of {cardSuit}");
 
         }
         
