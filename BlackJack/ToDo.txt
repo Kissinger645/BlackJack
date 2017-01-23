@@ -1,3 +1,4 @@
 ﻿2 Aces = bust, need option to make A=1
+tie score equals player win
 clean up the ugliness
 simplify

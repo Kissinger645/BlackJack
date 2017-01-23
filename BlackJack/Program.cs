@@ -10,15 +10,13 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
-            var dealerHand = new List<Cards>();            
+            var dealerHand = new List<Cards>();
             var playerHand = new List<Cards>();
             bool stand = false;
             Deck gameDeck = new Deck();
             gameDeck.Shuffle();
             bool gameOver = false;
-            bool playerBust = false;
-            bool dealerBust = false;
-            int cash = 100;
+            int cash = 100; //for future work
 
             while (gameOver == false)
             {
@@ -37,17 +35,19 @@ namespace BlackJack
                 if (dealerValue == 21)
                 {
                     Console.WriteLine("***BLACKJACK - dealer wins***");
-                    gameOver = true;
                     cash -= 10;
+                    gameOver = true;
+                    
                 }
                 else if (playerValue == 21)
                 {
                     Console.WriteLine("***BLACKJACK - YOU WIN!!***");
-                    gameOver = true;
                     cash += 10;
+                    gameOver = true;
+                    
                 }
 
-                while (stand == false)
+                while (stand == false && gameOver == false)
                 {
                     Console.WriteLine("Enter H for HIT or S for STAND");
                     var input = Console.ReadLine();
@@ -69,17 +69,16 @@ namespace BlackJack
                         stand = true;
                     }
                 }
-
                 //player stands
                 {
-                    while (dealerValue < 16)
+                    while (dealerValue < 16 && gameOver == false)
                     {
                         dealerHand.Add(gameDeck.GetCard());
                         dealerValue = dealerHand.Sum(x => x.cardValue);
                         Console.WriteLine($"Dealer has {dealerValue}");
                         dealerHand.ForEach(Console.WriteLine);
                         if (dealerValue > 21)
-                        {                            
+                        {
                             cash += 10;
                             Console.WriteLine("***Dealer bust. YOU WIN!***");
                             gameOver = true;
@@ -91,16 +90,21 @@ namespace BlackJack
                 if (dealerValue > playerValue)
                 {
                     Console.WriteLine("Dealer wins...");
-                    gameOver = true;
                     cash -= 10;
+                    gameOver = true;
+                }
+                else if (playerValue > dealerValue)
+                {
+                    Console.WriteLine("Congrats you win!");
+                    cash += 10;
+                    gameOver = true;
                 }
                 else
                 {
-                    Console.WriteLine("Congrats you win!");
-                    gameOver = true;
-                    cash += 10;
+                    Console.WriteLine("Game is tied. No winner");
                 }
             }
+
             Console.WriteLine("GAME OVER");
             Console.ReadKey();
         }
