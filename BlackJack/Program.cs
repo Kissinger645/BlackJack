@@ -102,6 +102,7 @@ namespace BlackJack
                 else
                 {
                     Console.WriteLine("Game is tied. No winner");
+                    gameOver = true;
                 }
             }
 
