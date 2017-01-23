@@ -15,68 +15,93 @@ namespace BlackJack
             bool stand = false;
             Deck gameDeck = new Deck();
             gameDeck.Shuffle();
+            bool gameOver = false;
+            bool playerBust = false;
+            bool dealerBust = false;
+            int cash = 100;
 
-            Console.WriteLine("Welcome to BlackJack");
-            playerHand.Add(gameDeck.GetCard());
-            dealerHand.Add(gameDeck.GetCard());
-            playerHand.Add(gameDeck.GetCard());
-            dealerHand.Add(gameDeck.GetCard());
-            int playerValue = playerHand.Sum(x => x.cardValue);
-            Console.WriteLine($"Player has {playerValue}");
-            playerHand.ForEach(Console.WriteLine);
-            int dealerValue = dealerHand.Sum(x => x.cardValue);
-            Console.WriteLine($"Dealer has {dealerValue}");
-            dealerHand.ForEach(Console.WriteLine);
+            while (gameOver == false)
+            {
+                Console.WriteLine("Welcome to BlackJack");
+                playerHand.Add(gameDeck.GetCard());
+                dealerHand.Add(gameDeck.GetCard());
+                playerHand.Add(gameDeck.GetCard());
+                dealerHand.Add(gameDeck.GetCard());
+                int playerValue = playerHand.Sum(x => x.cardValue);
+                Console.WriteLine($"Player has {playerValue}");
+                playerHand.ForEach(Console.WriteLine);
+                int dealerValue = dealerHand.Sum(x => x.cardValue);
+                Console.WriteLine($"Dealer has {dealerValue}");
+                dealerHand.ForEach(Console.WriteLine);
 
-            if (dealerValue == 21)
-            {
-                Console.WriteLine("BLACKJACK - dealer wins");
-            }
-            else if (playerValue == 21)
-            {
-                Console.WriteLine("BLACKJACK - YOU WIN!!");
-            }
-                        
-            while (stand == false)
-            {
-                Console.WriteLine("Enter H for HIT or S for STAND");
-                var input = Console.ReadLine();
-                if (input.ToUpper() == "H")
+                if (dealerValue == 21)
                 {
-                    playerHand.Add(gameDeck.GetCard());
-                    playerValue = playerHand.Sum(x => x.cardValue);
-                    Console.WriteLine($"Player has {playerValue}");
-                    playerHand.ForEach(Console.WriteLine);
-                    //check for bust
+                    Console.WriteLine("***BLACKJACK - dealer wins***");
+                    gameOver = true;
+                    cash -= 10;
+                }
+                else if (playerValue == 21)
+                {
+                    Console.WriteLine("***BLACKJACK - YOU WIN!!***");
+                    gameOver = true;
+                    cash += 10;
+                }
+
+                while (stand == false)
+                {
+                    Console.WriteLine("Enter H for HIT or S for STAND");
+                    var input = Console.ReadLine();
+                    if (input.ToUpper() == "H")
+                    {
+                        playerHand.Add(gameDeck.GetCard());
+                        playerValue = playerHand.Sum(x => x.cardValue);
+                        Console.WriteLine($"Player has {playerValue}");
+                        playerHand.ForEach(Console.WriteLine);
+                        if (playerValue > 21)
+                        {
+                            cash -= 10;
+                            Console.WriteLine("***BUST - You lose***");
+                            gameOver = true;
+                        }
+                    }
+                    else
+                    {
+                        stand = true;
+                    }
+                }
+
+                //player stands
+                {
+                    while (dealerValue < 16)
+                    {
+                        dealerHand.Add(gameDeck.GetCard());
+                        dealerValue = dealerHand.Sum(x => x.cardValue);
+                        Console.WriteLine($"Dealer has {dealerValue}");
+                        dealerHand.ForEach(Console.WriteLine);
+                        if (dealerValue > 21)
+                        {                            
+                            cash += 10;
+                            Console.WriteLine("***Dealer bust. YOU WIN!***");
+                            gameOver = true;
+                        }
+                    }
+                }
+
+                //Player Stands, Dealer >= 17
+                if (dealerValue > playerValue)
+                {
+                    Console.WriteLine("Dealer wins...");
+                    gameOver = true;
+                    cash -= 10;
                 }
                 else
                 {
-                    stand = true;
+                    Console.WriteLine("Congrats you win!");
+                    gameOver = true;
+                    cash += 10;
                 }
             }
-
-            //player stands
-            {
-                while (dealerValue < 16)
-                {
-                    dealerHand.Add(gameDeck.GetCard());
-                    dealerValue = dealerHand.Sum(x => x.cardValue);
-                    Console.WriteLine($"Dealer has {dealerValue}");
-                    dealerHand.ForEach(Console.WriteLine);
-                    //check for bust
-                }
-            }
-
-            //Player Stands, Dealer >= 17
-            if (dealerValue > playerValue)
-            {
-                Console.WriteLine("Dealer wins...");
-            }
-            else
-            {
-                Console.WriteLine("Congrats you win!");
-            }
-
+            Console.WriteLine("GAME OVER");
             Console.ReadKey();
         }
     }

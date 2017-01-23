@@ -1,2 +1,3 @@
 ﻿2 Aces = bust, need option to make A=1
 clean up the ugliness
+simplify
